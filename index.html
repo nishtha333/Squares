@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <style>
+            .squareContainer {
+                display: flex;
+                justify-content: space-around;
+            }
+            .buttonContainer {
+                display: flex;
+                flex-direction: column;
+            }
+            button {
+                height: 50px;
+                cursor: pointer;
+            }
+            .square {
+                width: 100px;
+                height: 100px;
+                border: solid 1px black;
+            }
+            #red {
+                background-color: red;
+            }
+            #green {
+                background-color: green;
+            }
+            #blue {
+                background-color: blue;
+            }
+            .hidden {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>The Square Demo</h1>
+        <div class='squareContainer'>
+            <div id='red' class='square'></div>
+            <div id='green' class='square'></div>
+            <div id='blue' class='square'></div>       
+        </div>
+        <hr />
+        <div class='buttonContainer'>
+            <button id='hideAllTheSquares'>Hide All the Squares</button>
+            <button id='showAllTheSquares'>Show All the Squares</button>
+            <button id='toggleGreen'>Toggle Green</button>
+            <button id='toggleBlue'>Toggle Blue</button>
+            <button id='toggleRed'>Toggle Red</button>
+        </div>
+    </body>
+    <script>
+        document.getElementById('hideAllTheSquares').addEventListener('click', () => {
+            const squares = this.document.getElementsByClassName('square');
+            [...squares].forEach( (sq) => sq.classList.add('hidden'));
+        });
+        document.getElementById('showAllTheSquares').addEventListener('click', () => {
+            const squares = this.document.getElementsByClassName('square');
+            [...squares].forEach( (sq) => sq.classList.remove('hidden'));
+        });
+        document.getElementById('toggleGreen').addEventListener('click', () => {
+            toggleSquareForId('green');
+        });
+        document.getElementById('toggleBlue').addEventListener('click', () => {
+            toggleSquareForId('blue');           
+        });
+        document.getElementById('toggleRed').addEventListener('click', () => {
+            toggleSquareForId('red');
+        });
+
+        function toggleSquareForId(squareId) {
+            const square = this.document.getElementById(squareId);
+            if (square.classList.contains('hidden')) {
+                square.classList.remove('hidden');
+            }
+            else {
+                square.classList.add('hidden');
+            }  
+        }
+    </script>
+</html>
