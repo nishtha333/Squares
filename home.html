@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <style>
+            .squareContainer {
+                display: flex;
+                justify-content: space-around;
+            }
+            .buttonContainer {
+                display: flex;
+                flex-direction: column;
+            }
+            button {
+                height: 50px;
+                cursor: pointer;
+            }
+            .square {
+                width: 100px;
+                height: 100px;
+                border: solid 1px black;
+            }
+            
+            #red {
+                background-color: red;
+            }
+            #green {
+                background-color: green;
+            }
+            #blue {
+                background-color: blue;
+            }
+            #yellow {
+                background-color: yellow;
+            }
+            #orange {
+                background-color: orange;
+            }
+            .hidden {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>The Square Demo</h1>
+        <div class='squareContainer'>     
+        </div>
+        <hr />
+        <div class='buttonContainer'>
+            <button id='hideAllTheSquares'>Hide All the Squares</button>
+            <button id='showAllTheSquares'>Show All the Squares</button>
+        </div>
+    </body>
+    <script>
+
+        const colors = ['blue', 'green', 'yellow', 'orange'];
+        generateDom(colors); //generates squares, buttons and event handlers
+
+        function generateDom(colors) {
+            const squareContainer = [...this.document.getElementsByClassName('squareContainer')][0];
+            colors.forEach( (color) => {
+                const child = document.createElement("div");
+                child.setAttribute('id', color);
+                child.setAttribute('class', 'square');
+                squareContainer.appendChild(child);
+            });
+
+            const buttonContainer = [...this.document.getElementsByClassName('buttonContainer')][0];
+            colors.forEach( (color) => {
+                const child = document.createElement("button");
+                child.setAttribute('id', "toggle" + color);
+                child.innerText = "Toggle " + color;
+                child.addEventListener('click', () => {
+                    toggleSquareForId(color);
+                });
+                buttonContainer.appendChild(child);
+            });
+
+        }
+
+        document.getElementById('hideAllTheSquares').addEventListener('click', () => {
+            const squares = this.document.getElementsByClassName('square');
+            [...squares].forEach( (sq) => sq.classList.add('hidden'));
+        });
+        document.getElementById('showAllTheSquares').addEventListener('click', () => {
+            const squares = this.document.getElementsByClassName('square');
+            [...squares].forEach( (sq) => sq.classList.remove('hidden'));
+        });
+
+        function toggleSquareForId(squareId) {
+            const square = this.document.getElementById(squareId);
+            if (square.classList.contains('hidden')) {
+                square.classList.remove('hidden');
+            }
+            else {
+                square.classList.add('hidden');
+            }  
+        }
+    </script>
+</html>
