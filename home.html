@@ -58,8 +58,8 @@
             const squareContainer = [...this.document.getElementsByClassName('squareContainer')][0];
             colors.forEach( (color) => {
                 const child = document.createElement("div");
-                child.setAttribute('id', color);
-                child.setAttribute('class', 'square');
+                child.setAttribute('id', color); //Can also do child.style.backgroundColor = color; (amd then explicit CSS color codes may not be present)
+                child.setAttribute('class', 'square'); //Can also do child.classList.add('square');
                 squareContainer.appendChild(child);
             });
 
@@ -67,7 +67,7 @@
             colors.forEach( (color) => {
                 const child = document.createElement("button");
                 child.setAttribute('id', "toggle" + color);
-                child.innerText = "Toggle " + color;
+                child.innerText = "Toggle " + color; //Can do using backticks: `Toggle ${'color}`;
                 child.addEventListener('click', () => {
                     toggleSquareForId(color);
                 });
@@ -78,15 +78,18 @@
 
         document.getElementById('hideAllTheSquares').addEventListener('click', () => {
             const squares = this.document.getElementsByClassName('square');
+            //Can also do: [...squares].forEach( (sq) => sq.style.display = "none");
             [...squares].forEach( (sq) => sq.classList.add('hidden'));
         });
         document.getElementById('showAllTheSquares').addEventListener('click', () => {
             const squares = this.document.getElementsByClassName('square');
+            //Can also do: [...squares].forEach( (sq) => sq.style.display = "inherit");
             [...squares].forEach( (sq) => sq.classList.remove('hidden'));
         });
 
         function toggleSquareForId(squareId) {
             const square = this.document.getElementById(squareId);
+            //Can also do square.style.display = sqaure.style.display === "none" ? "inherit" : "none";
             if (square.classList.contains('hidden')) {
                 square.classList.remove('hidden');
             }
